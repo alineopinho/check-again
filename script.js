@@ -1,0 +1,1 @@
+/* Estrutura JS do projeto Check Again */
