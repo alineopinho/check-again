@@ -116,3 +116,44 @@ function formatMoney(value) {
     currency: "BRL"
   });
 }
+
+
+showListButton.addEventListener("click", function () {
+  showAttempts++;
+
+  if (showAttempts === 1) {
+    message.textContent =
+      "Aqui está sua lista. 😊";
+
+    return;
+  }
+
+  if (showAttempts === 2) {
+    message.textContent =
+      "Hum... ela estava aqui agora mesmo. 😳";
+
+    message.classList.add("strange");
+
+    return;
+  }
+
+  if (showAttempts >= 3) {
+    message.textContent =
+      "Talvez esteja faltando alguma coisinha... 🤔";
+
+    showListButton.classList.add("hidden");
+
+    checkAgainButton.classList.remove("hidden");
+
+    startMystery();
+  }
+});
+
+checkAgainButton.addEventListener("click", function () {
+  if (listRecovered) {
+    return;
+  }
+
+  message.textContent =
+    "Ainda não parece completa... 👀";
+});
