@@ -75,6 +75,14 @@ function renderItems() {
         <div class="item-actions">
           <button
             type="button"
+            class="action-button edit-button"
+            onclick="startEdit(${item.id})"
+          >
+            Editar
+          </button>
+
+          <button
+            type="button"
             class="action-button remove-button"
             onclick="removeItem(${item.id})"
           >
