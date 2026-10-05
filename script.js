@@ -1,4 +1,5 @@
 const form = document.querySelector("#shopping-form");
+const formSection = document.querySelector(".form-section");
 
 const productInput = document.querySelector("#product");
 const quantityInput = document.querySelector("#quantity");
@@ -142,57 +143,141 @@ form.addEventListener("submit", function (event) {
 });
 
 function startEdit(id) {
-  const item = items.find(function (item) {
-    return item.id === id;
+  editingId = id;
+  renderItems();
+}
+
+function confirmEdit(id) {
+  const productField =
+    document.querySelector(`#edit-product-${id}`);
+
+  const quantityField =
+    document.querySelector(`#edit-quantity-${id}`);
+
+  const priceField =
+    document.querySelector(`#edit-price-${id}`);
+
+  const product = productField.value.trim();
+  const quantity = Number(quantityField.value);
+  const price = Number(priceField.value);
+
+  items = items.map(function (item) {
+    if (item.id === id) {
+      return {
+        ...item,
+        product,
+        quantity,
+        price
+      };
+    }
+
+    return item;
   });
 
-  if (!item) {
-    return;
-  }
+  editingId = null;
 
-  productInput.value = item.product;
-  quantityInput.value = item.quantity;
-  priceInput.value = item.price;
+  renderItems();
+}
 
-  editingId = id;
-
-  message.textContent =
-    "Edite os dados e confirme novamente. ✏️";
+function cancelEdit() {
+  editingId = null;
+  renderItems();
 }
 
 function renderItems() {
   shoppingList.innerHTML = "";
 
   items.forEach(function (item) {
-    const subtotal = item.quantity * item.price;
+    const subtotal =
+      item.quantity * item.price;
 
-    const row = document.createElement("tr");
+    const row =
+      document.createElement("tr");
 
-    row.innerHTML = `
-      <td>${item.product}</td>
-      <td>${item.quantity}</td>
-      <td>${formatMoney(item.price)}</td>
-      <td>${formatMoney(subtotal)}</td>
-      <td>
-        <div class="item-actions">
-          <button
-            type="button"
-            class="action-button edit-button"
-            onclick="startEdit(${item.id})"
+    if (editingId === item.id) {
+      row.innerHTML = `
+        <td>
+          <input
+            id="edit-product-${item.id}"
+            type="text"
+            value="${item.product}"
           >
-            Editar
-          </button>
+        </td>
 
-          <button
-            type="button"
-            class="action-button remove-button"
-            onclick="removeItem(${item.id})"
+        <td>
+          <input
+            id="edit-quantity-${item.id}"
+            type="number"
+            min="1"
+            value="${item.quantity}"
           >
-            Remover
-          </button>
-        </div>
-      </td>
-    `;
+        </td>
+
+        <td>
+          <input
+            id="edit-price-${item.id}"
+            type="number"
+            min="0"
+            step="0.01"
+            value="${item.price}"
+          >
+        </td>
+
+        <td>
+          ${formatMoney(subtotal)}
+        </td>
+
+        <td>
+          <div class="item-actions">
+            <button
+              type="button"
+              class="action-button edit-button"
+              onclick="confirmEdit(${item.id})"
+            >
+              Confirmar
+            </button>
+
+            <button
+              type="button"
+              class="action-button remove-button"
+              onclick="cancelEdit()"
+            >
+              Cancelar
+            </button>
+          </div>
+        </td>
+      `;
+    } else {
+      row.innerHTML = `
+        <td>${item.product}</td>
+
+        <td>${item.quantity}</td>
+
+        <td>${formatMoney(item.price)}</td>
+
+        <td>${formatMoney(subtotal)}</td>
+
+        <td>
+          <div class="item-actions">
+            <button
+              type="button"
+              class="action-button edit-button"
+              onclick="startEdit(${item.id})"
+            >
+              Editar
+            </button>
+
+            <button
+              type="button"
+              class="action-button remove-button"
+              onclick="removeItem(${item.id})"
+            >
+              Remover
+            </button>
+          </div>
+        </td>
+      `;
+    }
 
     shoppingList.appendChild(row);
   });
