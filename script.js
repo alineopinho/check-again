@@ -112,7 +112,7 @@ form.addEventListener("submit", function (event) {
   form.reset();
   quantityInput.value = 1;
 
-  if (items.length >= 3) {
+  if (!mysteryStarted && items.length >= 3) {
     showListButton.classList.remove("hidden");
   }
 });
@@ -240,6 +240,10 @@ checkAgainButton.addEventListener("click", function () {
 });
 
 function startMystery() {
+  if (mysteryStarted) {
+    return;
+  }
+
   mysteryStarted = true;
 
   tableSection.classList.add("hidden");
