@@ -98,6 +98,16 @@ function startEdit(id) {
     "Edite os dados e confirme novamente. ✏️";
 }
 
+function startMystery() {
+  mysteryStarted = true;
+
+  tableSection.classList.add("hidden");
+  mysteryTimerElement.classList.remove("hidden");
+
+  chooseMystery();
+  startMysteryTimer();
+}
+
 function renderItems() {
   shoppingList.innerHTML = "";
 
@@ -162,3 +172,32 @@ function formatMoney(value) {
     currency: "BRL"
   });
 }
+
+showListButton.addEventListener("click", function () {
+  showAttempts++;
+
+  if (showAttempts === 1) {
+    message.textContent = "Aqui está sua lista. 😊";
+    tableSection.classList.add("hidden");
+  }
+
+  if (showAttempts === 2) {
+    message.textContent =
+      "Hum... ela estava aqui agora mesmo. 😳";
+
+    message.classList.add("strange");
+    tableSection.classList.add("hidden");
+  }
+
+  if (showAttempts === 3) {
+    message.textContent =
+      "Talvez esteja faltando alguma coisinha... 🤔";
+
+    message.classList.add("strange");
+
+    showListButton.classList.add("hidden");
+    checkAgainButton.classList.remove("hidden");
+
+    startMystery();
+  }
+});
