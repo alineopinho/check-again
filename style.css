@@ -141,3 +141,64 @@ button:hover {
 }
   line-height: 1.6;
 }
+
+.message {
+  min-height: 30px;
+
+  margin: 24px 0 10px;
+
+  text-align: center;
+
+  color: #6c6277;
+
+  transition: 0.3s;
+}
+
+.message.strange {
+  color: #9b7488;
+  font-style: italic;
+  letter-spacing: 0.03em;
+}
+
+#show-list,
+#check-again {
+  display: block;
+
+  margin: 10px auto 0;
+}
+
+.strange-button {
+  background: #e8cbd7;
+}
+
+.system-warning {
+  margin-bottom: 18px;
+
+  padding: 12px 16px;
+
+  background: #f6e4ea;
+
+  border: 1px solid #e6c4d0;
+  border-radius: 12px;
+
+  text-align: center;
+
+  color: #875f70;
+
+  font-size: 0.9rem;
+}
+
+.clue {
+  margin: 0;
+
+  padding: 12px 16px;
+
+  background: rgba(245, 232, 238, 0.7);
+
+  border: 1px dashed #d9b9c8;
+  border-radius: 14px;
+
+  color: #856a78;
+
+  font-size: 0.9rem;
+}
