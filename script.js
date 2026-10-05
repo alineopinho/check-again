@@ -112,6 +112,34 @@ form.addEventListener("submit", function (event) {
   form.reset();
   quantityInput.value = 1;
 
+  tableSection.classList.add("hidden");
+  systemWarning.classList.add("hidden");
+  
+  if (
+    mysteryStarted &&
+    selectedMystery &&
+    normalizeText(product) ===
+      normalizeText(selectedMystery.item)
+  ) {
+    message.textContent =
+      "Item adicionado.";
+  
+    recoverList();
+  
+    return;
+  }
+  
+  if (mysteryStarted) {
+    message.textContent =
+      "Talvez você tenha esquecido alguma coisa... 🤔";
+  
+    checkAgainButton.classList.remove("hidden");
+  
+    return;
+  }
+
+
+  
   if (!mysteryStarted && items.length >= 3) {
     showListButton.classList.remove("hidden");
   }
@@ -192,6 +220,38 @@ function calculateTotal() {
   }, 0);
 
   totalElement.textContent = formatMoney(total);
+}
+
+function flashWrongTotal() {
+  const realTotal = items.reduce(
+    function (sum, item) {
+      return (
+        sum +
+        item.quantity *
+        item.price
+      );
+    },
+    0
+  );
+
+  const strangeTotal =
+    realTotal + 999999999999.99;
+
+  totalElement.textContent =
+    formatMoney(strangeTotal);
+
+  totalElement.classList.add(
+    "total-anomaly"
+  );
+
+  setTimeout(function () {
+    totalElement.textContent =
+      formatMoney(realTotal);
+
+    totalElement.classList.remove(
+      "total-anomaly"
+    );
+  }, 400);
 }
 
 function formatMoney(value) {
@@ -276,6 +336,37 @@ function chooseMystery() {
     availableMysteries[
       Math.floor(Math.random() * availableMysteries.length)
     ];
+}
+
+function recoverList() {
+  listRecovered = true;
+
+  clearInterval(mysteryTimer);
+
+  mysteryTimerElement.classList.add("hidden");
+
+  checkAgainButton.classList.add("hidden");
+
+  clue.classList.add("hidden");
+
+  setTimeout(function () {
+    tableSection.classList.remove("hidden");
+
+    systemWarning.textContent =
+      "Lista recuperada. Desculpe. Parece que foi um erro nosso no banco de memória. 😅";
+
+    systemWarning.classList.remove("hidden");
+
+    message.textContent = "";
+
+    tableSection.classList.add("glitch");
+
+    flashWrongTotal();
+
+    setTimeout(function () {
+      tableSection.classList.remove("glitch");
+    }, 600);
+  }, 1000);
 }
 
 function startMysteryTimer() {
