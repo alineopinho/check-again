@@ -30,6 +30,44 @@ let mysteryTimer = null;
 let selectedMystery = null;
 let editingId = null;
 
+const mysteries = [
+  {
+    item: "sal",
+    clues: [
+      "Pista: talvez esteja faltando algo simples... algo que quase toda cozinha tem.",
+      "Segunda pista: uma pequena quantidade já muda bastante o sabor."
+    ]
+  },
+  {
+    item: "leite",
+    clues: [
+      "Pista: talvez esteja faltando algo que costuma ficar refrigerado.",
+      "Segunda pista: aparece bastante no café da manhã."
+    ]
+  },
+  {
+    item: "arroz",
+    clues: [
+      "Pista: talvez esteja faltando algo muito comum no almoço.",
+      "Segunda pista: costuma acompanhar feijão."
+    ]
+  },
+  {
+    item: "café",
+    clues: [
+      "Pista: talvez esteja faltando algo que muita gente procura logo cedo.",
+      "Segunda pista: seu cheiro costuma entregar a resposta."
+    ]
+  },
+  {
+    item: "açúcar",
+    clues: [
+      "Pista: talvez esteja faltando algo comum em receitas e bebidas.",
+      "Segunda pista: costuma deixar as coisas mais doces."
+    ]
+  }
+];
+
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
@@ -96,16 +134,6 @@ function startEdit(id) {
 
   message.textContent =
     "Edite os dados e confirme novamente. ✏️";
-}
-
-function startMystery() {
-  mysteryStarted = true;
-
-  tableSection.classList.add("hidden");
-  mysteryTimerElement.classList.remove("hidden");
-
-  chooseMystery();
-  startMysteryTimer();
 }
 
 function renderItems() {
@@ -201,3 +229,87 @@ showListButton.addEventListener("click", function () {
     startMystery();
   }
 });
+
+checkAgainButton.addEventListener("click", function () {
+  message.textContent =
+    "Ainda parece estar faltando alguma coisa... 👀";
+
+  message.classList.add("strange");
+
+  tableSection.classList.add("hidden");
+});
+
+function startMystery() {
+  mysteryStarted = true;
+
+  tableSection.classList.add("hidden");
+  mysteryTimerElement.classList.remove("hidden");
+
+  chooseMystery();
+  startMysteryTimer();
+}
+
+function chooseMystery() {
+  const existingProducts = items.map(function (item) {
+    return normalizeText(item.product);
+  });
+
+  const availableMysteries = mysteries.filter(function (mystery) {
+    return !existingProducts.includes(
+      normalizeText(mystery.item)
+    );
+  });
+
+  if (availableMysteries.length === 0) {
+    selectedMystery = mysteries[
+      Math.floor(Math.random() * mysteries.length)
+    ];
+
+    return;
+  }
+
+  selectedMystery =
+    availableMysteries[
+      Math.floor(Math.random() * availableMysteries.length)
+    ];
+}
+
+function startMysteryTimer() {
+  mysterySeconds = 0;
+
+  mysteryTimerElement.textContent = "00:00";
+
+  mysteryTimer = setInterval(function () {
+    mysterySeconds++;
+
+    updateMysteryTimer();
+
+    if (mysterySeconds === 45) {
+      clue.textContent = selectedMystery.clues[0];
+      clue.classList.remove("hidden");
+    }
+
+    if (mysterySeconds === 75) {
+      clue.textContent = selectedMystery.clues[1];
+    }
+  }, 1000);
+}
+
+function updateMysteryTimer() {
+  const minutes = Math.floor(mysterySeconds / 60);
+  const seconds = mysterySeconds % 60;
+
+  const formattedMinutes = String(minutes).padStart(2, "0");
+  const formattedSeconds = String(seconds).padStart(2, "0");
+
+  mysteryTimerElement.textContent =
+    `${formattedMinutes}:${formattedSeconds}`;
+}
+
+function normalizeText(text) {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
+}
