@@ -202,3 +202,76 @@ button:hover {
 
   font-size: 0.9rem;
 }
+
+.table-section {
+  margin-top: 34px;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  min-width: 700px;
+
+  border-collapse: collapse;
+
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+thead {
+  background: #ddd2ec;
+}
+
+th,
+td {
+  padding: 14px;
+
+  text-align: left;
+  white-space: nowrap;
+}
+
+tbody tr {
+  background: rgba(255, 255, 255, 0.78);
+
+  border-bottom: 1px solid #eee7f4;
+}
+
+tbody tr:hover {
+  background: #faf5ff;
+}
+
+.item-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.action-button {
+  padding: 7px 10px;
+  font-size: 0.82rem;
+}
+
+.edit-button {
+  background: #c9b6df;
+  color: #43394f;
+}
+
+.remove-button {
+  background: #f0cbd2;
+  color: #633f4a;
+}
+
+.summary {
+  margin-top: 20px;
+
+  padding: 16px;
+
+  display: flex;
+  justify-content: space-between;
+
+  background: #eef0fa;
+
+  border-radius: 14px;
+
+  color: #514a61;
+}
