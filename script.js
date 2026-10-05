@@ -115,21 +115,19 @@ form.addEventListener("submit", function (event) {
   tableSection.classList.add("hidden");
   systemWarning.classList.add("hidden");
   
-  if (
-    mysteryStarted &&
-    selectedMystery &&
-    normalizeText(product) ===
-      normalizeText(selectedMystery.item)
-  ) {
-    message.textContent =
-      "Item adicionado.";
+  if (mysteryStarted && selectedMystery) {
+    const addedProduct = normalizeText(product);
+    const secretProduct = normalizeText(selectedMystery.item);
   
-    recoverList();
+    if (addedProduct === secretProduct) {
+      message.textContent =
+        "Ah! Era isso. ✨";
   
-    return;
-  }
+      recoverList();
   
-  if (mysteryStarted) {
+      return;
+    }
+  
     message.textContent =
       "Talvez você tenha esquecido alguma coisa... 🤔";
   
@@ -137,8 +135,6 @@ form.addEventListener("submit", function (event) {
   
     return;
   }
-
-
   
   if (!mysteryStarted && items.length >= 3) {
     showListButton.classList.remove("hidden");
@@ -325,10 +321,7 @@ function chooseMystery() {
   });
 
   if (availableMysteries.length === 0) {
-    selectedMystery = mysteries[
-      Math.floor(Math.random() * mysteries.length)
-    ];
-
+    selectedMystery = null;
     return;
   }
 
