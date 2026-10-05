@@ -37,26 +37,66 @@ form.addEventListener("submit", function (event) {
   const quantity = Number(quantityInput.value);
   const price = Number(priceInput.value);
 
-  const newItem = {
-    id: Date.now(),
-    product,
-    quantity,
-    price
-  };
+  if (editingId !== null) {
+    items = items.map(function (item) {
+      if (item.id === editingId) {
+        return {
+          ...item,
+          product,
+          quantity,
+          price
+        };
+      }
 
-  items.push(newItem);
+      return item;
+    });
+
+    editingId = null;
+
+    message.textContent =
+      "Item atualizado com sucesso. ✨";
+  } else {
+    const newItem = {
+      id: Date.now(),
+      product,
+      quantity,
+      price
+    };
+
+    items.push(newItem);
+
+    message.textContent =
+      "Item adicionado com sucesso. 🌷";
+  }
 
   renderItems();
 
   form.reset();
   quantityInput.value = 1;
 
-  message.textContent = "Item adicionado com sucesso. 🌷";
-
   if (items.length >= 3) {
     showListButton.classList.remove("hidden");
   }
 });
+
+function startEdit(id) {
+  const item = items.find(function (item) {
+    return item.id === id;
+  });
+
+  if (!item) {
+    return;
+  }
+
+  productInput.value = item.product;
+  quantityInput.value = item.quantity;
+  priceInput.value = item.price;
+
+  editingId = id;
+
+  message.textContent =
+    "Edite os dados e confirme novamente. ✏️";
+}
 
 function renderItems() {
   shoppingList.innerHTML = "";
