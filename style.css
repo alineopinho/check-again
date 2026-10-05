@@ -7,34 +7,25 @@
 body {
   margin: 0;
   min-height: 100vh;
-
   font-family: "Nunito", sans-serif;
-
   background: linear-gradient(
     135deg,
     #f7e8ee,
     #ebe8f6,
     #e7f4ef
   );
-
   display: flex;
   justify-content: center;
-
   padding: 40px 20px;
 }
 
 .shopping-app {
   position: relative;
-
   width: 100%;
   max-width: 850px;
-
   padding: 34px;
-
   background: rgba(255, 255, 255, 0.84);
-
   border-radius: 24px;
-
   box-shadow:
     0 20px 60px rgba(70, 60, 90, 0.12);
 }
@@ -46,34 +37,28 @@ body {
 
 .app-header h1 {
   margin-bottom: 14px;
-
   font-family: "Baloo 2", sans-serif;
   font-weight: 700;
   font-size: 2.4rem;
-
   color: #6f5f86;
 }
 
 .app-header p {
   margin: 0;
-
   color: #8b8194;
+  line-height: 1.6;
+}
 
-  #shopping-form {
+#shopping-form {
   display: grid;
-
-  grid-template-columns:
-    2fr 1fr 1fr auto;
-
+  grid-template-columns: 2fr 1fr 1fr auto;
   gap: 16px;
-
   align-items: end;
 }
 
 .field-group {
   display: flex;
   flex-direction: column;
-
   gap: 7px;
 }
 
@@ -84,24 +69,17 @@ body {
 
 .field-group input {
   width: 100%;
-
   padding: 12px 14px;
-
   border: 1px solid #d9d1e2;
   border-radius: 12px;
-
   background: #fffafd;
-
   outline: none;
-
   transition: 0.2s;
 }
 
 .field-group input:focus {
   border-color: #a994c3;
-
-  box-shadow:
-    0 0 0 3px rgba(169, 148, 195, 0.12);
+  box-shadow:     0 0 0 3px rgba(169, 148, 195, 0.12);
 }
 
 button,
@@ -111,20 +89,14 @@ input {
 
 button {
   font-weight: 600;
-
   border: none;
   border-radius: 12px;
-
   padding: 12px 18px;
-
   background: #c9b6df;
   color: #43394f;
-
   cursor: pointer;
-
-  box-shadow:
+  box-shadow: 
     0 4px 10px rgba(102, 82, 130, 0.10);
-
   transition:
     transform 0.2s,
     background 0.2s,
@@ -133,13 +105,9 @@ button {
 
 button:hover {
   transform: translateY(-2px);
-
   background: #bca5d6;
-
   box-shadow:
     0 6px 14px rgba(102, 82, 130, 0.16);
-}
-  line-height: 1.6;
 }
 
 .message {
