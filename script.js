@@ -422,12 +422,12 @@ function recoverList() {
   clearInterval(mysteryTimer);
 
   mysteryTimerElement.classList.add("hidden");
-
   checkAgainButton.classList.add("hidden");
-
   clue.classList.add("hidden");
 
   setTimeout(function () {
+    formSection.classList.add("hidden");
+
     tableSection.classList.remove("hidden");
 
     systemWarning.textContent =
@@ -444,6 +444,10 @@ function recoverList() {
     setTimeout(function () {
       tableSection.classList.remove("glitch");
     }, 600);
+
+    setTimeout(function () {
+      systemWarning.classList.add("hidden");
+    }, 6000);
   }, 1000);
 }
 
