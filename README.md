@@ -1,69 +1,39 @@
 # Check Again
 
-Uma lista de compras interativa feita com HTML, CSS e JavaScript.
+**Check Again** é um minigame web de dedução desenvolvido com HTML, CSS e JavaScript.
 
-À primeira vista, a aplicação funciona como uma lista de compras comum: o usuário adiciona produtos, quantidades e preços. Porém, ao tentar visualizar sua lista, a interface começa a apresentar um comportamento estranho.
+O projeto começou como uma lista de compras interativa, mas evoluiu para uma experiência em que o jogador precisa descobrir qual item está faltando para recuperar uma lista aparentemente corrompida.
 
-## Conceito
+A interface mantém uma aparência delicada e amigável enquanto o sistema apresenta comportamentos estranhos, pistas e pequenas anomalias.
 
-O projeto mistura uma aplicação web simples com uma pequena experiência interativa de mistério.
+## Como funciona
 
-A interface possui uma aparência suave e amigável, em tons pastéis, enquanto o comportamento da aplicação começa gradualmente a contradizer essa aparência.
+O jogador adiciona alguns produtos normalmente.
 
-## Fluxo principal
+Depois de tentar visualizar a lista, o sistema começa a apresentar comportamentos inesperados.
 
-1. O usuário adiciona produtos, quantidades e preços.
-2. Depois de pelo menos três itens, o botão "Ver lista" é liberado.
-3. A aplicação afirma que exibiu a lista, mas nada aparece.
-4. Após novas tentativas, surge a mensagem de que talvez esteja faltando alguma coisa.
-5. Um item secreto é escolhido dinamicamente.
-6. O usuário pode continuar adicionando produtos e tentando recuperar a lista.
-7. Após algum tempo, pistas são exibidas.
-8. Quando o item correto é adicionado, a lista é recuperada.
-9. Todos os produtos cadastrados aparecem normalmente.
-10. O total apresenta uma pequena anomalia antes de voltar ao valor correto.
+Um item secreto é escolhido entre produtos que ainda não estão cadastrados. O jogador precisa descobrir esse item por meio de pistas e tentativas.
 
-## Regras importantes
-
-- O item secreto muda entre execuções.
-- O item secreto não deve ser escolhido entre produtos que já estavam cadastrados quando o mistério começou.
-- Quantidade e preço do item secreto são livres; apenas o nome do produto importa.
-- Produtos adicionados durante o mistério continuam armazenados.
-- A tabela permanece escondida até o mistério ser resolvido.
-- Os dados reais da lista não devem ser alterados pelo mistério.
-- A interface deve continuar visualmente delicada e amigável mesmo durante os comportamentos estranhos.
+Ao encontrar o produto correto, a lista é recuperada.
 
 ## Tecnologias
 
 - HTML
 - CSS
 - JavaScript
+- GitHub Pages
+- GitHub
 
-## Conceitos praticados
+## Documentação
 
-- DOM
-- Eventos
-- Arrays e objetos
-- Funções
-- `map`, `filter`, `find` e `reduce`
-- `setTimeout`
-- `setInterval`
-- Manipulação de classes CSS
-- Estado da aplicação
-- Formatação de valores monetários
-- Responsividade
+- [Conceito e design do jogo](docs/GAME_DESIGN.md)
+- [Regras do jogo](docs/GAME_RULES.md)
+- [Funcionalidades](docs/FEATURES.md)
+- [Estrutura técnica](docs/TECHNICAL.md)
+- [Histórico e desenvolvimento](docs/DEVELOPMENT.md)
 
-## Funcionalidades
+## Autoria
 
-- Adicionar produtos
-- Definir quantidade e preço
-- Calcular subtotal
-- Calcular total
-- Editar itens
-- Remover itens
-- Mensagens dinâmicas
-- Sistema de pistas
-- Item secreto
-- Timer do mistério
-- Recuperação da lista
-- Efeito temporário de anomalia no total
+Projeto idealizado e desenvolvido por Aline Oliveira de Pinho.
+
+Desenvolvido como projeto de estudo e portfólio, explorando lógica de programação, manipulação do DOM, estados de interface e design de jogos para web.
