@@ -16,3 +16,4 @@ flowchart TD
     E --> F[Informar que nenhum item foi encontrado]
     F --> G[Preservar dados internamente]
     G --> H[Iniciar mistério]
+```
